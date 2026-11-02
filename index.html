@@ -13,80 +13,113 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap">
 <style>
-:root{--bg:#0b0b0f;--fg:#f2f1ee;--mut:#9a9ba5;--card:#1a1b21;--card2:#24252d;--line:#2a2b33;--ac:#ff6a3d;--acfg:#fff;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f5f4f0;--fg:#17181c;--mut:#6d6e75;--card:#fff;--card2:#ebe9e2;--line:#dcdad2;--ac:#e8501f;color-scheme:light}}
-:root[data-theme="light"]{--bg:#f5f4f0;--fg:#17181c;--mut:#6d6e75;--card:#fff;--card2:#ebe9e2;--line:#dcdad2;--ac:#e8501f;color-scheme:light}
+:root{--bg:#121214;--card:#1c1c20;--card2:#27272c;--line:#2e2e35;--fg:#f4f3f1;--mut:#8e8f99;--ac:#f0486b;--acfg:#fff;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f5f3;--card:#fff;--card2:#ebe9e5;--line:#dedcd6;--fg:#17181c;--mut:#6d6e75;--ac:#e5365a;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f6f5f3;--card:#fff;--card2:#ebe9e5;--line:#dedcd6;--fg:#17181c;--mut:#6d6e75;--ac:#e5365a;color-scheme:light}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--fg);font:15px/1.4 "Be Vietnam Pro",system-ui,sans-serif}
-button,input{font:inherit;color:inherit}
+button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
-.hd{display:flex;align-items:center;gap:8px;padding:12px 16px 8px}
-.logo{display:flex;align-items:center;gap:8px;flex:1;font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--ac)}
-.logo i{width:34px;height:34px;border-radius:9px;background:var(--ac);color:var(--acfg);display:grid;place-items:center}
-.logo i svg{width:20px;height:20px}
-.rb{width:42px;height:42px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center}
-.sb{display:flex;gap:8px;padding:0 16px 8px}
-.sb input{flex:1;padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);outline:0}
-.sb[hidden]{display:none}
-.pl{display:flex;gap:8px;padding:6px 16px 12px;overflow-x:auto;scrollbar-width:none}
-.pl button{white-space:nowrap;border:0;border-radius:999px;background:var(--card);padding:10px 16px;font-weight:600}
-.pl button.on{background:var(--fg);color:var(--bg)}
-main{padding-bottom:120px;max-width:1100px;margin:0 auto}
-.hero{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:0}
-.sl{flex:0 0 100%;scroll-snap-align:center;padding:0 16px;position:relative;cursor:pointer}
-.sl .im{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;max-height:62vh;width:100%;background:var(--card)}
-.sl img{width:100%;height:100%;object-fit:cover;display:block}
-.sl .tx{position:absolute;left:0;right:0;bottom:0;padding:60px 18px 18px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff}
-.sl h2{margin:0 0 2px;font-size:24px;line-height:1.2}
-.sl p{margin:0 0 12px;color:#ccc;font-size:13px}
-.go{border:0;background:var(--ac);color:var(--acfg);padding:10px 20px;border-radius:999px;font-weight:700}
-.dots{display:flex;justify-content:center;gap:6px;margin:10px 0 4px}
-.dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}
-.dots i.on{background:var(--fg)}
-.rh{display:flex;align-items:baseline;justify-content:space-between;padding:22px 16px 10px}
-.rh h3{margin:0;font-size:20px;font-weight:800}
-.rh button{border:0;background:none;color:var(--mut)}
+.tt{display:flex;align-items:center;gap:8px;padding:12px 16px 4px;position:relative}
+.tt h2{margin:0;font-size:20px;flex:1}
+.tt.c{justify-content:center;min-height:56px}.tt.c h2{flex:none;text-align:center}.tt.c .rb{position:absolute;right:12px}
+.rb{width:42px;height:42px;border-radius:50%;border:0;background:var(--card);display:grid;place-items:center;flex:none}
+.sr{display:flex;gap:10px;align-items:center;padding:12px 16px 4px}
+.sbx{flex:1;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;padding:0 14px;height:46px;color:var(--mut);background:var(--card)}
+.sbx input{flex:1;min-width:0;border:0;background:none;outline:0}
+.sbx svg{width:19px;height:19px}
+.rk{background:none;border:0;padding:6px;color:var(--fg)}
+.tabs{display:flex;gap:22px;padding:8px 16px 0;overflow-x:auto;scrollbar-width:none}
+.tabs button{background:none;border:0;padding:8px 0 9px;white-space:nowrap;font-size:17px;color:var(--mut);border-bottom:3px solid transparent}
+.tabs button.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:700}
+.tabs.t2{flex:1;padding:0}
+.chp{display:flex;flex-wrap:wrap;gap:10px;padding:12px 16px 4px}
+.chip{border:0;background:var(--card2);border-radius:999px;padding:9px 16px}
+.chip.on{background:var(--ac);color:var(--acfg);font-weight:600}
+.ctl{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 10px;color:var(--mut)}
+.ck{background:none;border:0;display:flex;align-items:center;gap:8px;color:var(--mut);padding:0}
+.ck i{width:20px;height:20px;border-radius:50%;border:2px solid var(--mut);display:block}
+.ck i.on{border-color:var(--ac);background:radial-gradient(var(--ac) 45%,transparent 50%)}
+.ctl select{background:none;border:0;color:var(--mut);outline:0}
+main{padding-bottom:110px;max-width:900px;margin:0 auto}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:18px 8px 6px;text-align:center}
+.sc button{background:none;border:0;color:var(--mut);font-size:13px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.sc .ic{width:58px;height:58px;border-radius:18px;background:var(--card2);display:grid;place-items:center;color:var(--ac)}
+.sc .ic svg{width:28px;height:28px}
+.rh{display:flex;align-items:center;justify-content:space-between;padding:22px 16px 12px}
+.rh h3{margin:0;font-size:22px;font-weight:800}
+.rh button{border:0;background:none;color:var(--mut);display:flex;align-items:center;gap:2px}
+.rh button svg{width:16px;height:16px}
 .hs{display:flex;gap:12px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}
 .cd{position:relative;cursor:pointer;flex:0 0 130px;min-width:0}
 .cd .cv{aspect-ratio:3/4;width:100%;object-fit:cover;border-radius:12px;background:var(--card);display:block}
-.cd b{display:block;margin-top:6px;font-size:14px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.cd small{color:var(--mut);display:block;font-size:12px}
-.cd.w{flex-basis:240px}
-.cd.w .cv{aspect-ratio:16/10}
+.cd b{display:block;margin-top:7px;font-size:15px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cd small{color:var(--mut);display:block;font-size:13px;margin-top:2px}
+.cd small svg,.st svg{width:15px;height:15px;display:inline;vertical-align:-3px;margin-right:5px}
+.cd.w{flex-basis:230px}.cd.w .cv{aspect-ratio:16/10}
 .bar{height:3px;background:var(--line);border-radius:2px;margin-top:6px}
 .bar i{display:block;height:100%;background:var(--ac);border-radius:2px}
-.ed{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center}
-.ed svg{width:15px;height:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 12px;padding:6px 16px}
+.ed{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center}
+.ed svg{width:14px;height:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 12px;padding:14px 16px}
 .grid .cd{flex:none}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 16px 14px}
-.chip{border:0;background:var(--card);border-radius:999px;padding:9px 15px;font-weight:600}
-.chip.on{background:var(--ac);color:var(--acfg)}
-.pt{display:flex;align-items:center;gap:10px;padding:8px 16px}
-.pt h2{margin:0;font-size:20px}
-.empty{text-align:center;color:var(--mut);padding:64px 24px}
+.ls{padding:0 16px}
+.li{display:flex;gap:14px;padding:12px 0;cursor:pointer;align-items:flex-start}
+.lc{flex:none;width:96px}
+.lc .cv{aspect-ratio:3/4;width:100%;object-fit:cover;border-radius:12px;background:var(--card);display:block}
+.lb{flex:1;min-width:0}
+.lb b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;line-height:1.3}
+.tg{display:inline-block;margin:6px 0 4px;border:1px solid var(--ac);color:var(--ac);border-radius:6px;padding:1px 8px;font-size:13px}
+.lb p{margin:0 0 6px;color:var(--mut);font-size:14px}
+.st{color:var(--mut);font-size:13px}
+.la{display:flex;flex-direction:column;gap:6px}
+.mini{width:34px;height:34px;border-radius:50%;border:0;background:var(--card2);display:grid;place-items:center;font-size:17px;color:var(--ac)}
+.mini svg{width:15px;height:15px;color:var(--fg)}
+.sg{flex:0 0 150px;background:var(--card);border-radius:18px;padding:12px;text-align:center;cursor:pointer}
+.sg .cv{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;display:block;background:var(--card2)}
+.sg b{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin:8px 0}
+.sg .btn{padding:8px 18px;border-radius:999px}
+.rc{margin:16px;padding:20px;border-radius:20px;background:var(--card)}
+.rc h3{margin:0 0 4px;font-size:20px}.rc p{margin:0 0 14px;color:var(--mut)}
+.empty{text-align:center;color:var(--mut);padding:56px 24px}
 .empty p{margin:0 0 18px}
+.emp{text-align:center;color:var(--mut);padding:36px 0}.emp svg{width:64px;height:64px;margin:0 auto 8px;opacity:.5}
 .btn{background:var(--ac);color:var(--acfg);border:0;border-radius:12px;padding:11px 16px;font-weight:700}
+.btn svg{display:inline;vertical-align:-5px;margin-right:4px;width:18px;height:18px}
 .btn.g{background:var(--card2);color:var(--fg)}
 .btn.r{background:transparent;color:#ff5a5a;border:1px solid #ff5a5a}
-.bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:10;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.4)}
-.bn button{width:92px;height:52px;border-radius:999px;border:0;background:none;color:var(--mut);display:grid;place-items:center}
-.bn button.on{background:var(--card2);color:var(--fg)}
-.av{width:84px;height:84px;border-radius:50%;background:linear-gradient(145deg,#5be08a,#25a85a);display:grid;place-items:center;font-size:34px;font-weight:800;color:#06210f}
-.me{display:flex;align-items:center;gap:16px;padding:28px 16px 18px}
-.me h2{margin:0;font-size:22px}
-.me small{color:var(--mut)}
-.box{margin:12px 16px;padding:18px;border-radius:18px;background:var(--card);display:flex;align-items:center;gap:12px;border:0;width:calc(100% - 32px);text-align:left}
-.box div{flex:1}
-.box b{display:block;font-size:17px}
-.box span{color:var(--mut);font-size:14px}
-.box .ar{width:44px;height:44px;border-radius:50%;background:var(--ac);color:var(--acfg);display:grid;place-items:center}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px;margin:12px 0}
-.two button{display:flex;align-items:center;gap:10px;padding:16px;border-radius:16px;border:0;background:var(--card);font-weight:600;text-align:left}
-.sec{padding:20px 16px 6px;font-size:18px;font-weight:800}
-.lr{display:flex;align-items:center;justify-content:space-between;margin:0 16px;padding:14px 0;border-bottom:1px solid var(--line);background:none;border-left:0;border-right:0;border-top:0;width:calc(100% - 32px);text-align:left}
+.mh{background:linear-gradient(#6a2a3a,var(--bg) 92%);padding:12px 16px 18px;margin-bottom:6px}
+.hic{display:flex;justify-content:flex-end;gap:10px}
+.hic .rb{background:rgba(255,255,255,.14);color:#fff}
+.pf{display:flex;align-items:center;gap:14px;margin:18px 0 22px}
+.av{width:72px;height:72px;border-radius:50%;background:linear-gradient(145deg,#5be08a,#25a85a);display:grid;place-items:center;font-size:30px;font-weight:800;color:#06210f;flex:none}
+.av.g{background:#e8e6e2;color:#999}.av.g svg{width:38px;height:38px}
+.nm{flex:1;min-width:0}
+.nm h2{margin:0;font-size:20px}
+.nm.lg{background:none;border:0;text-align:left;font-size:19px;font-weight:700;color:var(--fg)}
+.lnk{background:none;border:0;padding:0;color:var(--mut);text-decoration:underline}
+.stt{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.stt b{display:block;font-size:26px}.stt span{color:var(--mut);font-size:14px}
+.card{margin:14px 16px;padding:16px 0 16px 16px;border-radius:20px;background:var(--card)}
+.card .ch{display:flex;justify-content:space-between;align-items:center;padding-right:12px}
+.card h3{margin:0;font-size:20px}
+.card .chp{padding:12px 16px 12px 0}
+.card .chip{background:var(--card2);padding:7px 14px;font-size:14px}.card .chip.on{background:var(--ac)}
+.card .hs{padding-left:0}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px;padding-right:16px;text-align:center}
+.mg button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--fg);font-size:13px}
+.mg svg{width:34px;height:34px;color:var(--ac)}
+.bn{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;background:var(--bg);border-top:1px solid var(--line);padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px))}
+.bn button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--mut);font-size:12px}
+.bn button.on{color:var(--ac)}
+.fab{position:fixed;right:18px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:9;width:60px;height:60px;border-radius:50%;border:0;background:var(--ac);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.fab[hidden]{display:none}
+.ph{display:grid;place-items:center;font-size:42px;font-weight:800;color:var(--mut);background:var(--card2)}
+.pst{width:120px;aspect-ratio:3/4;border-radius:14px;border:2px dashed var(--line);background:var(--card2) center/cover no-repeat;display:grid;place-items:center;color:var(--mut);font-size:13px;text-align:center;cursor:pointer;overflow:hidden}
+.fr{display:flex;gap:14px;align-items:flex-start}
+.fr>div:last-child{flex:1;min-width:0}
 #modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}
 #modal[hidden],#rd[hidden]{display:none}
 .sheet{background:var(--card);width:100%;max-width:520px;max-height:92%;overflow:auto;border-radius:20px 20px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px))}
@@ -97,11 +130,6 @@ main{padding-bottom:120px;max-width:1100px;margin:0 auto}
 .sheet .row{display:flex;gap:8px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
 .sheet .col{display:flex;flex-direction:column;gap:10px;margin-top:14px}
 .sheet hr{border:0;border-top:1px solid var(--line);margin:14px 0}
-.ph{display:grid;place-items:center;font-size:42px;font-weight:800;color:var(--mut);background:var(--card2)}
-.sl .ph{width:100%;height:100%}
-.pst{width:120px;aspect-ratio:3/4;border-radius:14px;border:2px dashed var(--line);background:var(--card2) center/cover no-repeat;display:grid;place-items:center;color:var(--mut);font-size:13px;text-align:center;cursor:pointer;overflow:hidden}
-.fr{display:flex;gap:14px;align-items:flex-start}
-.fr>div:last-child{flex:1;min-width:0}
 .err{color:#ff6b6b;font-size:13px;min-height:18px;margin-top:8px}
 #rd{position:fixed;inset:0;z-index:20;background:#0c0c0e;color:#eee}
 #pg{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;text-align:center}
@@ -115,20 +143,14 @@ main{padding-bottom:120px;max-width:1100px;margin:0 auto}
 </style>
 </head>
 <body>
-<div id="app">
-<div class="hd"><div class="logo"><i id="lg"></i>Tủ truyện</div><button class="rb" id="bs" aria-label="Tìm kiếm"></button><button class="rb" id="ba" aria-label="Thêm truyện"></button></div>
-<div class="sb" id="sb" hidden><input id="q" type="search" placeholder="Tìm tên truyện"></div>
-<div id="pl" class="pl"></div>
-<main id="mn"></main>
-<div class="bn" id="bn"></div>
-</div>
+<div id="app"><div id="top"></div><main id="mn"></main><nav class="bn" id="bn"></nav><button class="fab" id="fab" data-act="add" hidden aria-label="Thêm truyện"></button></div>
 <input type="file" id="fd" webkitdirectory multiple hidden>
 <input type="file" id="fi" accept="image/*" multiple hidden>
 <input type="file" id="fj" accept=".json,application/json" hidden>
 <input type="file" id="fp" accept="image/*" hidden>
 <input type="file" id="fc" accept="image/*" multiple hidden>
 <div id="modal" hidden></div>
-<div id="rd" hidden><div id="tb"><button id="bk">←</button><span class="t" id="tt"></span><button id="pv">‹</button><select id="cs"></select><button id="nxb">›</button></div><div id="pg"></div><div id="ct"></div></div>
+<div id="rd" hidden><div id="tb"><button id="bk">←</button><span class="t" id="tt"></span><button id="fv" aria-label="Theo dõi">♡</button><button id="pv">‹</button><select id="cs"></select><button id="nxb">›</button></div><div id="pg"></div><div id="ct"></div></div>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -138,7 +160,7 @@ const IC={home:P('<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-
 const GEN=['Hành động','Phiêu lưu','Hài hước','Tình cảm','Kinh dị','Fantasy','Học đường','Đời thường','Khác'];
 const cvr=c=>c.poster||((c.chapters.find(x=>x.files.length)||{files:[]}).files[0])||null;
 function cimg(c,cls){const b=cvr(c);if(!b)return `<div class="${cls} ph">${esc((c.title||'?')[0].toUpperCase())}</div>`;const u=URL.createObjectURL(b);covers.push(u);return `<img class="${cls}" src="${u}" alt="">`}
-let db=null,comics=[],tab='home',list=null,gf=null,gf2=null,q='',cur=null,urls=[],obs=null,tmr=null,covers=[],me=null;
+let db=null,comics=[],tab='rec',list=null,gf=null,gf2=null,q='',cur=null,urls=[],obs=null,tmr=null,covers=[],me=null;
 try{me=localStorage.getItem('tt_u')}catch(e){}
 
 /* storage */
@@ -151,76 +173,115 @@ const dbDel=(s,k)=>new Promise(r=>{if(!db)return r();try{const o=st(s,'readwrite
 const saveC=c=>dbPut('c',c);
 
 /* render */
-function pills(){
-  const gs=[...new Set(comics.map(c=>c.genre||'Khác'))].sort(nat);
-  $('#pl').hidden=!(tab==='home'&&!list&&!q&&comics.length);
-  $('#pl').innerHTML=['Tất cả',...gs].map((g,i)=>`<button data-pg="${i?esc(g):''}" class="${(i?gf===g:!gf)?'on':''}">${esc(g)}</button>`).join('');
-}
-function nav(){
-  $('#bn').innerHTML=[['home','home'],['gen','grid'],['me','user']].map(([k,i])=>`<button data-t="${k}" class="${tab===k&&!q?'on':''}" aria-label="${k}">${IC[i]}</button>`).join('');
-}
-function card(c,o={}){
-  const p=c.p,tot=c.chapters.length;
-  let sub=esc(c.genre||'Khác')+' · '+tot+' chương',bar='';
-  if(o.prog&&p&&c.chapters[p.ch]){const n=c.chapters[p.ch].files.length||1;sub='Chương '+(p.ch+1)+', trang '+(p.pg+1)+'/'+n;bar=`<div class="bar"><i style="width:${Math.min(100,Math.round((p.ch+(p.pg+1)/n)/tot*100))}%"></i></div>`}
-  return `<div class="cd ${o.w?'w':''}" data-id="${c.id}">${cimg(c,'cv')}<button class="ed" data-ed="${c.id}" aria-label="Sửa">${IC.edit}</button><b>${esc(c.title)}</b><small>${sub}</small>${bar}</div>`;
-}
-const grid=(l,o)=>l.length?`<div class="grid">${l.map(c=>card(c,o)).join('')}</div>`:'<div class="empty">Không có truyện nào.</div>';
-const row=(t,l,more,o)=>l.length?`<div class="rh"><h3>${esc(t)}</h3>${more?`<button data-more="${esc(more)}">Xem thêm</button>`:''}</div><div class="hs">${l.map(c=>card(c,o)).join('')}</div>`:'';
+Object.assign(IC,{rank:P('<path d="M5 20V10M12 20V4M19 20v-7"/>'),compass:P('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>'),follow:P('<circle cx="10" cy="8" r="4"/><path d="M3 21c0-4 3-6 7-6M18 8v6M15 11h6"/>'),face:P('<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 10h.01M15 10h.01"/>'),cloud:P('<path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1 0 9z"/>'),gear:P('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>'),box:P('<path d="M3 8l9-5 9 5-9 5zM3 8v9l9 5 9-5V8M12 13v9"/>'),chev:P('<path d="M9 6l6 6-6 6"/>')});
+let rt='rec',ct='all',cg='',unread=false,sortBy='new',ft='fol',mt='hist',rnd=null;
+const NAV=[['rec','Đề xuất','home'],['cat','Phân loại','grid'],['fol','Theo dõi','follow'],['exp','Khám phá','compass'],['me','Tôi','face']];
+const EM=['🌟','👑','💗','🔥','🌙','🍀'];
+const genres=()=>[...new Set(comics.map(c=>c.genre||'Khác'))].sort(nat);
 const byNew=()=>[...comics].sort((a,b)=>b.added-a.added);
 const cont=()=>comics.filter(c=>c.p&&c.chapters[c.p.ch]).sort((a,b)=>b.p.t-a.p.t);
+const fols=()=>comics.filter(c=>c.fav);
 const byGen=g=>comics.filter(c=>(c.genre||'Khác')===g).sort((a,b)=>nat(a.title,b.title));
-const emptyAll=()=>`<div class="empty"><p>Chưa có truyện nào. Chọn thư mục hoặc ảnh trong máy để bắt đầu.</p><button class="btn" data-act="add">Thêm truyện từ thiết bị</button></div>`;
+const LISTS={all:{t:'Thư viện',items:()=>[...comics].sort((a,b)=>nat(a.title,b.title))},cont:{t:'Đang đọc',items:cont},new:{t:'Mới thêm',items:byNew},fol:{t:'Theo dõi',items:fols}};
+function card(c,o={}){
+  const p=c.p,tot=c.chapters.length;let sub=`${IC.book}${tot} chap`,bar='';
+  if(o.prog&&p&&c.chapters[p.ch]){const n=c.chapters[p.ch].files.length||1;sub='Chap '+(p.ch+1)+', trang '+(p.pg+1)+'/'+n;bar=`<div class="bar"><i style="width:${Math.min(100,Math.round((p.ch+(p.pg+1)/n)/tot*100))}%"></i></div>`}
+  return `<div class="cd ${o.w?'w':''}" data-id="${c.id}">${cimg(c,'cv')}<button class="ed" data-ed="${c.id}" aria-label="Sửa">${IC.edit}</button><b>${esc(c.title)}</b><small>${sub}</small>${bar}</div>`;
+}
+function li(c){
+  const p=c.p&&c.chapters[c.p.ch]?c.p:null,tot=c.chapters.length;
+  return `<div class="li" data-id="${c.id}"><div class="lc">${cimg(c,'cv')}</div><div class="lb"><b>${esc(c.title)}</b><span class="tg">${esc(c.genre||'Khác')}</span><p>${p?'Đang đọc: chap '+(p.ch+1)+', trang '+(p.pg+1):'Chưa đọc'}</p><div class="st">${IC.book}${tot} chap${c.fav?' · Đã theo dõi':''}</div></div><div class="la"><button class="mini" data-fv="${c.id}" aria-label="Theo dõi">${c.fav?'♥':'♡'}</button><button class="mini" data-ed="${c.id}" aria-label="Sửa">${IC.edit}</button></div></div>`;
+}
+const row=(t,l,more,o,em)=>l.length?`<div class="rh"><h3>${em?em+' ':''}${esc(t)}</h3>${more?`<button data-more="${esc(more)}">Thêm${IC.chev}</button>`:''}</div><div class="hs">${l.map(c=>card(c,o)).join('')}</div>`:'';
+const lst=l=>l.length?`<div class="ls">${l.map(li).join('')}</div>`:'';
+const emptyAll=()=>`<div class="empty"><p>Chưa có truyện nào. Chọn thư mục hoặc ảnh trong máy để bắt đầu.</p><button class="btn" data-act="add">Thêm truyện</button></div>`;
+const tabsH=(arr,attr,cur)=>arr.map(([k,l])=>`<button ${attr}="${esc(k)}" class="${cur===k?'on':''}">${esc(l)}</button>`).join('');
 
-function render(){
-  covers.forEach(URL.revokeObjectURL);covers=[];nav();pills();
-  const m=$('#mn');
-  if(q){const k=q.toLowerCase();m.innerHTML=grid(comics.filter(c=>c.title.toLowerCase().includes(k)||(c.genre||'').toLowerCase().includes(k)));return}
-  if(list){m.innerHTML=`<div class="pt"><button class="rb" data-back="1" aria-label="Quay lại">←</button><h2>${esc(list.t)}</h2></div>`+grid(list.items(),list.o);return}
-  if(tab==='me')return renderMe();
-  if(tab==='gen'){
-    const gs=[...new Set(comics.map(c=>c.genre||'Khác'))].sort(nat);
-    m.innerHTML=comics.length?`<div class="chips">${gs.map(g=>`<button class="chip ${gf2===g?'on':''}" data-g="${esc(g)}">${esc(g)} (${byGen(g).length})</button>`).join('')}</div>`+(gf2&&gs.includes(gf2)?grid(byGen(gf2)):'<div class="empty">Chọn một thể loại để xem truyện.</div>'):emptyAll();return}
+function render(){renderTop();renderMain();
+  $('#bn').innerHTML=NAV.map(([k,l,i])=>`<button data-tab="${k}" class="${tab===k&&!list?'on':''}">${IC[i]}<span>${l}</span></button>`).join('');
+  const f=$('#fab');f.innerHTML=IC.plus;f.hidden=!((tab==='fol'||tab==='me')&&!list&&!q);
+}
+function renderTop(){
+  let h='';
+  if(list)h=`<div class="tt"><button class="rb" data-back="1" aria-label="Quay lại">←</button><h2>${esc(list.t)}</h2></div>`;
+  else if(tab==='rec')h=`<div class="sr"><label class="sbx">${IC.search}<input id="q" type="search" placeholder="Tìm tên truyện" value="${esc(q)}"></label><button class="rk" data-lst="new" aria-label="Mới nhất">${IC.rank}</button></div><div class="tabs">${tabsH([['rec','Đề xuất'],...genres().map(g=>[g,g])],'data-rt',rt)}</div>`;
+  else if(tab==='cat')h=`<div class="tt c"><h2>Phân loại</h2><button class="rb" data-act="search" aria-label="Tìm kiếm">${IC.search}</button></div><div class="tabs">${tabsH([['all','Tất cả'],['cont','Đang đọc'],['fol','Theo dõi']],'data-ct',ct)}</div><div class="chp">${tabsH([['','Toàn bộ'],...genres().map(g=>[g,g])],'data-cg',cg).replace(/<button /g,'<button style="" ').replace(/class="(on)?"/g,(m,o)=>'class="chip '+(o||'')+'"')}</div>`;
+  else if(tab==='fol')h=`<div class="tt"><div class="tabs t2">${tabsH([['fol','Theo dõi'],['cont','Đang đọc']],'data-ft',ft)}</div><button class="rb" data-act="search" aria-label="Tìm kiếm">${IC.search}</button><button class="rb" data-act="backup" aria-label="Sao lưu">${IC.cloud}</button></div>`;
+  else if(tab==='exp')h=`<div class="tt c"><h2>Khám phá</h2></div>`;
+  else h=`<div class="mh"><div class="hic"><button class="rb" data-act="backup" aria-label="Sao lưu">${IC.cloud}</button><button class="rb" data-act="theme" aria-label="Giao diện">${IC.gear}</button></div><div class="pf"><div class="av ${me?'':'g'}">${me?esc(me[0].toUpperCase()):IC.user}</div>${me?`<div class="nm"><h2>${esc(me)}</h2><button class="lnk" data-act="logout">Đăng xuất</button></div>`:`<button class="nm lg" data-auth="login">Bấm vào đây để đăng nhập</button><button class="btn" data-auth="register">Đăng ký</button>`}</div><div class="stt"><div><b>${comics.length}</b><span>Truyện</span></div><div><b>${cont().length}</b><span>Đang đọc</span></div><div><b>${fols().length}</b><span>Theo dõi</span></div></div></div>`;
+  $('#top').innerHTML=h;
+}
+function renderMain(){
+  covers.forEach(URL.revokeObjectURL);covers=[];
+  const m=$('#mn');let h='';
+  if(list){const l=list.items();m.innerHTML=l.length?lst(l):'<div class="empty">Chưa có truyện nào.</div>';return}
+  if(q){const k=q.toLowerCase();const l=comics.filter(c=>c.title.toLowerCase().includes(k)||(c.genre||'').toLowerCase().includes(k));m.innerHTML=l.length?lst(l):'<div class="empty">Không tìm thấy truyện nào.</div>';return}
+  if(tab==='me'){
+    const items=mt==='hist'?cont():mt==='fol'?fols():[...comics].sort((a,b)=>nat(a.title,b.title));
+    h=`<div class="card"><div class="ch"><h3>TỦ SÁCH</h3><button class="rb" data-lst="${mt==='hist'?'cont':mt==='fol'?'fol':'all'}" aria-label="Xem tất cả">${IC.chev}</button></div><div class="chp">${tabsH([['hist','Lịch sử'],['fol','Theo dõi'],['lib','Thư viện']],'data-mt',mt).replace(/class="(on)?"/g,(x,o)=>'class="chip '+(o||'')+'"')}</div>${items.length?`<div class="hs">${items.slice(0,10).map(c=>card(c,{prog:mt==='hist'})).join('')}</div>`:`<div class="emp">${IC.box}<p>Chưa có truyện nào</p></div>`}</div>`;
+    h+=`<div class="card"><h3>Quản lý</h3><div class="mg"><button data-act="add">${IC.plus}Thêm truyện</button><button data-act="backup">${IC.cloud}Sao lưu</button><button data-act="theme">${IC.gear}Giao diện</button><button ${me?'data-act="logout"':'data-auth="login"'}>${IC.user}${me?'Đăng xuất':'Đăng nhập'}</button></div></div>`;
+    m.innerHTML=h;return;
+  }
   if(!comics.length){m.innerHTML=emptyAll();return}
-  if(gf){m.innerHTML=grid(byGen(gf));return}
-  const nw=byNew().slice(0,5);
-  let h=`<div class="hero" id="hero">${nw.map(c=>{return `<div class="sl" data-id="${c.id}"><div class="im">${cimg(c,'')}<div class="tx"><h2>${esc(c.title)}</h2><p>${esc(c.genre||'Khác')} · ${c.chapters.length} chương</p><button class="go">${c.p?'Đọc tiếp':'Đọc ngay'}</button></div></div></div>`}).join('')}</div><div class="dots" id="dots">${nw.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`;
-  const ct=cont();
-  h+=row('Đang đọc',ct,'cont',{w:1,prog:1});
-  h+=row('Mới thêm',byNew().slice(0,12),'new');
-  [...new Set(comics.map(c=>c.genre||'Khác'))].sort(nat).forEach(g=>{h+=row(g,byGen(g).slice(0,12),'g:'+g)});
+  if(tab==='rec'){
+    if(rt!=='rec'&&genres().includes(rt)){m.innerHTML=`<div class="grid">${byGen(rt).map(c=>card(c)).join('')}</div>`;return}
+    h=`<div class="sc">${[['all','lib','Thư viện'],['cont','clock','Đang đọc'],['new','rank','Mới thêm'],['add','plus','Thêm truyện']].map(([k,i,l])=>`<button ${k==='add'?'data-act="add"':`data-lst="${k}"`}><span class="ic">${IC[i]}</span>${l}</button>`).join('')}</div>`;
+    h+=row('Đang đọc',cont(),'cont',{w:1,prog:1},'📖')+row('Mới thêm',byNew().slice(0,12),'new',null,'🆕');
+    genres().forEach((g,i)=>{h+=row(g,byGen(g).slice(0,12),'g:'+g,null,EM[i%EM.length])});
+    const sg=comics.filter(c=>!c.p).slice(0,4);
+    if(sg.length)h+=`<div class="rh"><h3>💗 Có thể bạn sẽ thích</h3></div>`+lst(sg);
+    m.innerHTML=h;return;
+  }
+  if(tab==='cat'){
+    let l=ct==='cont'?cont():ct==='fol'?fols():[...comics];
+    if(cg)l=l.filter(c=>(c.genre||'Khác')===cg);
+    if(unread)l=l.filter(c=>!c.p);
+    const S={new:(a,b)=>b.added-a.added,name:(a,b)=>nat(a.title,b.title),read:(a,b)=>((b.p&&b.p.t)||0)-((a.p&&a.p.t)||0),chap:(a,b)=>b.chapters.length-a.chapters.length};
+    l.sort(S[sortBy]);
+    m.innerHTML=`<div class="ctl"><button class="ck" data-act="unread"><i class="${unread?'on':''}"></i>Chỉ xem truyện chưa đọc</button><select id="srt" aria-label="Sắp xếp">${[['new','Mới thêm'],['name','Tên A–Z'],['read','Đọc gần đây'],['chap','Nhiều chap']].map(([k,v])=>`<option value="${k}" ${sortBy===k?'selected':''}>${v}</option>`).join('')}</select></div>`+(l.length?lst(l):'<div class="empty">Không có truyện nào.</div>');return;
+  }
+  if(tab==='fol'){
+    if(ft==='cont'){const l=cont();m.innerHTML=l.length?lst(l):'<div class="empty">Bạn chưa đọc truyện nào.</div>';return}
+    const sg=comics.filter(c=>!c.fav),f=fols();
+    if(sg.length)h+=`<div class="rh"><h3>Truyện bạn có thể thích</h3></div><div class="hs">${sg.slice(0,10).map(c=>`<div class="sg" data-id="${c.id}">${cimg(c,'cv')}<b>${esc(c.title)}</b><button class="btn" data-fv="${c.id}">Theo dõi</button></div>`).join('')}</div>`;
+    h+=`<div class="rh"><h3>Đang theo dõi</h3></div>`+(f.length?lst(f):'<div class="empty">Bạn chưa theo dõi truyện nào.</div>');
+    m.innerHTML=h;return;
+  }
+  const r=comics.find(c=>c.id===rnd);
+  h=`<div class="rc"><h3>Hôm nay đọc gì?</h3><p>Chọn ngẫu nhiên một truyện trong tủ của bạn.</p><button class="btn" data-act="rand">${IC.compass}Chọn ngẫu nhiên</button></div>`+(r?lst([r]):'');
+  h+=row('Nhiều chap nhất',[...comics].sort((a,b)=>b.chapters.length-a.chapters.length).slice(0,12),'',null,'📚')+row('Chưa đọc',comics.filter(c=>!c.p).slice(0,12),'',null,'✨')+row('Mới thêm',byNew().slice(0,12),'new',null,'🆕');
   m.innerHTML=h;
-  const he=$('#hero');if(he)he.onscroll=()=>{const i=Math.round(he.scrollLeft/he.clientWidth);document.querySelectorAll('#dots i').forEach((d,j)=>d.classList.toggle('on',i===j))};
 }
-function renderMe(){
-  const nm=me||'Khách';
-  let h=`<div class="me"><div class="av">${esc(nm[0].toUpperCase())}</div><div><h2>${esc(nm)}</h2><small>${me?'Đã đăng nhập trên thiết bị này':'Đăng nhập để sao lưu dữ liệu'}</small></div></div>`;
-  if(!me)h+=`<div class="two"><button class="btn" data-auth="login" style="text-align:center;justify-content:center">Đăng nhập</button><button class="btn g" data-auth="register" style="text-align:center;justify-content:center">Đăng ký</button></div>`;
-  h+=`<button class="box" data-act="backup"><div><b>Sao lưu và khôi phục</b><span>Giữ lại tiến độ đọc, thể loại, danh sách truyện</span></div><span class="ar">${IC.arrow}</span></button>`;
-  h+=`<div class="two"><button data-lst="all">${IC.lib}Thư viện (${comics.length})</button><button data-lst="cont">${IC.clock}Đang đọc (${cont().length})</button></div>`;
-  h+=`<div class="sec">Cài đặt</div><button class="lr" data-act="theme"><span>Giao diện sáng / tối</span><span style="color:var(--mut)">Đổi</span></button><button class="lr" data-act="add"><span>Thêm truyện từ thiết bị</span><span style="color:var(--mut)">+</span></button>`;
-  if(me)h+=`<button class="lr" data-act="logout"><span style="color:#ff6b6b">Đăng xuất</span><span></span></button>`;
-  $('#mn').innerHTML=h;
-}
-const LISTS={all:{t:'Thư viện',items:()=>[...comics].sort((a,b)=>nat(a.title,b.title))},cont:{t:'Đang đọc',items:cont,o:{prog:1}},new:{t:'Mới thêm',items:byNew}};
 
 /* events */
-$('#bn').onclick=e=>{const b=e.target.closest('[data-t]');if(b){tab=b.dataset.t;list=null;q='';$('#sb').hidden=true;$('#q').value='';render();scrollTo(0,0)}};
-$('#pl').onclick=e=>{const b=e.target.closest('[data-pg]');if(b){gf=b.dataset.pg||null;render()}};
-$('#bs').onclick=()=>{const s=$('#sb');s.hidden=!s.hidden;if(!s.hidden)$('#q').focus();else{q='';$('#q').value='';render()}};
-$('#q').oninput=e=>{q=e.target.value.trim();render()};
-$('#ba').onclick=pick;
-$('#mn').onclick=e=>{
-  const T=e.target;
-  if(T.closest('[data-back]')){list=null;return render()}
-  const mo=T.closest('[data-more]');if(mo){const k=mo.dataset.more;if(k.startsWith('g:')){gf=k.slice(2);}else{list=LISTS[k]}return render()}
-  const lt=T.closest('[data-lst]');if(lt){list=LISTS[lt.dataset.lst];return render()}
-  const g=T.closest('[data-g]');if(g){gf2=gf2===g.dataset.g?null:g.dataset.g;return render()}
-  const a=T.closest('[data-act]');if(a){const k=a.dataset.act;if(k==='add')return pick();if(k==='backup')return backupUI();if(k==='theme')return theme();if(k==='logout'){me=null;try{localStorage.removeItem('tt_u')}catch(e){}return render()}}
-  const au=T.closest('[data-auth]');if(au)return authUI(au.dataset.auth);
-  const ed=T.closest('[data-ed]');if(ed)return editForm(ed.dataset.ed);
-  const cd=T.closest('[data-id]');if(cd){const c=comics.find(x=>x.id===cd.dataset.id);if(c){const p=c.p&&c.chapters[c.p.ch]?c.p:{ch:0,pg:0};read(c.id,p.ch,p.pg)}}
+$('#app').onclick=e=>{
+  const d=s=>e.target.closest(s);let x;
+  if(d('[data-back]')){list=null;return render()}
+  if(x=d('[data-fv]')){const c=comics.find(y=>y.id===x.dataset.fv);if(c){c.fav=!c.fav;saveC(c);render()}return}
+  if(x=d('[data-ed]'))return editForm(x.dataset.ed);
+  if(x=d('[data-tab]')){tab=x.dataset.tab;list=null;q='';return render()}
+  if(x=d('[data-rt]')){rt=x.dataset.rt;return render()}
+  if(x=d('[data-ct]')){ct=x.dataset.ct;return render()}
+  if(x=d('[data-cg]')){cg=x.dataset.cg;return render()}
+  if(x=d('[data-ft]')){ft=x.dataset.ft;return render()}
+  if(x=d('[data-mt]')){mt=x.dataset.mt;return render()}
+  if(x=d('[data-more]')){const k=x.dataset.more;if(k.startsWith('g:')){rt=k.slice(2)}else list=LISTS[k];return render()}
+  if(x=d('[data-lst]')){list=LISTS[x.dataset.lst];return render()}
+  if(x=d('[data-auth]'))return authUI(x.dataset.auth);
+  if(x=d('[data-act]')){
+    const k=x.dataset.act;
+    if(k==='add')return pick();if(k==='backup')return backupUI();if(k==='theme')return theme();
+    if(k==='logout'){me=null;try{localStorage.removeItem('tt_u')}catch(_){}return render()}
+    if(k==='search'){tab='rec';list=null;render();const i=$('#q');if(i)i.focus();return}
+    if(k==='unread'){unread=!unread;return renderMain()}
+    if(k==='rand'){const pool=comics.filter(c=>!c.p),l=pool.length?pool:comics;if(l.length)rnd=l[Math.floor(Math.random()*l.length)].id;return renderMain()}
+    return;
+  }
+  if(x=d('[data-id]')){const c=comics.find(y=>y.id===x.dataset.id);if(c){const p=c.p&&c.chapters[c.p.ch]?c.p:{ch:0,pg:0};read(c.id,p.ch,p.pg)}}
 };
+$('#app').oninput=e=>{if(e.target.id==='q'){q=e.target.value.trim();renderMain()}};
+$('#app').onchange=e=>{if(e.target.id==='srt'){sortBy=e.target.value;renderMain()}};
+$('#fv').onclick=()=>{if(!cur)return;cur.c.fav=!cur.c.fav;$('#fv').textContent=cur.c.fav?'♥':'♡';saveC(cur.c)};
 function theme(){const r=document.documentElement;const dk=!matchMedia('(prefers-color-scheme:light)').matches;const now=r.dataset.theme||(dk?'dark':'light');r.dataset.theme=now==='dark'?'light':'dark'}
 function modal(h){const m=$('#modal');m.innerHTML=h;m.hidden=false}
 function closeM(){$('#modal').hidden=true;$('#modal').innerHTML=''}
@@ -243,7 +304,7 @@ function addForm(){
     const n=Math.max(1,Math.min(2000,parseInt($('#fn').value)||1),F.chs.length);
     const chapters=[];for(let i=0;i<n;i++)chapters.push(F.chs[i]||{name:'Chap '+(i+1),files:[]});
     const c={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title,genre:$('#fg').value.trim()||'Khác',added:Date.now(),poster:F.poster||null,chapters,p:null};
-    comics.push(c);await saveC(c);F=null;closeM();tab='home';list=null;gf=null;render();
+    comics.push(c);await saveC(c);F=null;closeM();tab='rec';rt='rec';list=null;q='';render();
   };
 }
 $('#fp').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f&&F&&isImg(f))setPoster(f)};
@@ -314,13 +375,13 @@ function authUI(mode){
 }
 
 /* backup */
-function snapshot(){return{v:1,user:me,at:Date.now(),comics:comics.map(c=>({title:c.title,genre:c.genre||'Khác',added:c.added,p:c.p,chapters:c.chapters.map(x=>x.name)}))}}
+function snapshot(){return{v:1,user:me,at:Date.now(),comics:comics.map(c=>({title:c.title,genre:c.genre||'Khác',added:c.added,p:c.p,fav:!!c.fav,chapters:c.chapters.map(x=>x.name)}))}}
 function restore(o){
   if(!o||!Array.isArray(o.comics))throw 0;
   let ok=0,miss=0;
   o.comics.forEach(b=>{const c=comics.find(x=>x.title.toLowerCase()===String(b.title).toLowerCase());
     if(!c){miss++;return}
-    c.genre=b.genre||c.genre;
+    c.genre=b.genre||c.genre;if(b.fav)c.fav=true;
     if(b.p&&c.chapters[b.p.ch]&&(!c.p||b.p.t>c.p.t))c.p=b.p;
     saveC(c);ok++});
   return{ok,miss};
@@ -345,7 +406,7 @@ async function read(id,ch,pg){
   const c=comics.find(x=>x.id===id);if(!c)return;
   cur={c,ch};
   const R=$('#rd'),PG=$('#pg');R.hidden=false;document.body.style.overflow='hidden';
-  $('#tt').textContent=c.title;
+  $('#tt').textContent=c.title;$('#fv').textContent=c.fav?'♥':'♡';
   $('#cs').innerHTML=c.chapters.map((x,i)=>`<option value="${i}" ${i===ch?'selected':''}>${esc(x.name)}</option>`).join('');
   urls.forEach(URL.revokeObjectURL);PG.innerHTML='';PG.scrollTop=0;
   const files=c.chapters[ch].files;
@@ -374,7 +435,7 @@ $('#pv').onclick=()=>{if(cur.ch>0)read(cur.c.id,cur.ch-1,0)};
 $('#nxb').onclick=()=>{if(cur.ch<cur.c.chapters.length-1)read(cur.c.id,cur.ch+1,0)};
 $('#pg').onclick=e=>{if(e.target.tagName==='IMG')$('#tb').classList.toggle('off')};
 
-$('#lg').innerHTML=IC.book;$('#bs').innerHTML=IC.search;$('#ba').innerHTML=IC.plus;
+
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
 (async()=>{db=await openDB();comics=await dbAll('c');render()})();
 </script>
