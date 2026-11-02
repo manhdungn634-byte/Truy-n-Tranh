@@ -97,6 +97,11 @@ main{padding-bottom:120px;max-width:1100px;margin:0 auto}
 .sheet .row{display:flex;gap:8px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
 .sheet .col{display:flex;flex-direction:column;gap:10px;margin-top:14px}
 .sheet hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.ph{display:grid;place-items:center;font-size:42px;font-weight:800;color:var(--mut);background:var(--card2)}
+.sl .ph{width:100%;height:100%}
+.pst{width:120px;aspect-ratio:3/4;border-radius:14px;border:2px dashed var(--line);background:var(--card2) center/cover no-repeat;display:grid;place-items:center;color:var(--mut);font-size:13px;text-align:center;cursor:pointer;overflow:hidden}
+.fr{display:flex;gap:14px;align-items:flex-start}
+.fr>div:last-child{flex:1;min-width:0}
 .err{color:#ff6b6b;font-size:13px;min-height:18px;margin-top:8px}
 #rd{position:fixed;inset:0;z-index:20;background:#0c0c0e;color:#eee}
 #pg{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;text-align:center}
@@ -120,6 +125,8 @@ main{padding-bottom:120px;max-width:1100px;margin:0 auto}
 <input type="file" id="fd" webkitdirectory multiple hidden>
 <input type="file" id="fi" accept="image/*" multiple hidden>
 <input type="file" id="fj" accept=".json,application/json" hidden>
+<input type="file" id="fp" accept="image/*" hidden>
+<input type="file" id="fc" accept="image/*" multiple hidden>
 <div id="modal" hidden></div>
 <div id="rd" hidden><div id="tb"><button id="bk">←</button><span class="t" id="tt"></span><button id="pv">‹</button><select id="cs"></select><button id="nxb">›</button></div><div id="pg"></div><div id="ct"></div></div>
 <script>
@@ -129,6 +136,8 @@ const nat=(a,b)=>a.localeCompare(b,undefined,{numeric:true,sensitivity:'base'});
 const P=d=>`<svg viewBox="0 0 24 24">${d}</svg>`;
 const IC={home:P('<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>'),grid:P('<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>'),user:P('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'),search:P('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'),plus:P('<path d="M12 5v14M5 12h14"/>'),book:P('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>'),arrow:P('<path d="M5 12h14M13 6l6 6-6 6"/>'),edit:P('<path d="M4 20h4L19 9l-4-4L4 16z"/>'),lib:P('<path d="M6 3h12v18l-6-4-6 4z"/>'),clock:P('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>')};
 const GEN=['Hành động','Phiêu lưu','Hài hước','Tình cảm','Kinh dị','Fantasy','Học đường','Đời thường','Khác'];
+const cvr=c=>c.poster||((c.chapters.find(x=>x.files.length)||{files:[]}).files[0])||null;
+function cimg(c,cls){const b=cvr(c);if(!b)return `<div class="${cls} ph">${esc((c.title||'?')[0].toUpperCase())}</div>`;const u=URL.createObjectURL(b);covers.push(u);return `<img class="${cls}" src="${u}" alt="">`}
 let db=null,comics=[],tab='home',list=null,gf=null,gf2=null,q='',cur=null,urls=[],obs=null,tmr=null,covers=[],me=null;
 try{me=localStorage.getItem('tt_u')}catch(e){}
 
@@ -153,9 +162,8 @@ function nav(){
 function card(c,o={}){
   const p=c.p,tot=c.chapters.length;
   let sub=esc(c.genre||'Khác')+' · '+tot+' chương',bar='';
-  if(o.prog&&p&&c.chapters[p.ch]){const n=c.chapters[p.ch].files.length;sub='Chương '+(p.ch+1)+', trang '+(p.pg+1)+'/'+n;bar=`<div class="bar"><i style="width:${Math.min(100,Math.round((p.ch+(p.pg+1)/n)/tot*100))}%"></i></div>`}
-  const u=URL.createObjectURL(c.chapters[0].files[0]);covers.push(u);
-  return `<div class="cd ${o.w?'w':''}" data-id="${c.id}"><img class="cv" src="${u}" alt=""><button class="ed" data-ed="${c.id}" aria-label="Sửa">${IC.edit}</button><b>${esc(c.title)}</b><small>${sub}</small>${bar}</div>`;
+  if(o.prog&&p&&c.chapters[p.ch]){const n=c.chapters[p.ch].files.length||1;sub='Chương '+(p.ch+1)+', trang '+(p.pg+1)+'/'+n;bar=`<div class="bar"><i style="width:${Math.min(100,Math.round((p.ch+(p.pg+1)/n)/tot*100))}%"></i></div>`}
+  return `<div class="cd ${o.w?'w':''}" data-id="${c.id}">${cimg(c,'cv')}<button class="ed" data-ed="${c.id}" aria-label="Sửa">${IC.edit}</button><b>${esc(c.title)}</b><small>${sub}</small>${bar}</div>`;
 }
 const grid=(l,o)=>l.length?`<div class="grid">${l.map(c=>card(c,o)).join('')}</div>`:'<div class="empty">Không có truyện nào.</div>';
 const row=(t,l,more,o)=>l.length?`<div class="rh"><h3>${esc(t)}</h3>${more?`<button data-more="${esc(more)}">Xem thêm</button>`:''}</div><div class="hs">${l.map(c=>card(c,o)).join('')}</div>`:'';
@@ -176,7 +184,7 @@ function render(){
   if(!comics.length){m.innerHTML=emptyAll();return}
   if(gf){m.innerHTML=grid(byGen(gf));return}
   const nw=byNew().slice(0,5);
-  let h=`<div class="hero" id="hero">${nw.map(c=>{const u=URL.createObjectURL(c.chapters[0].files[0]);covers.push(u);return `<div class="sl" data-id="${c.id}"><div class="im"><img src="${u}" alt=""><div class="tx"><h2>${esc(c.title)}</h2><p>${esc(c.genre||'Khác')} · ${c.chapters.length} chương</p><button class="go">${c.p?'Đọc tiếp':'Đọc ngay'}</button></div></div></div>`}).join('')}</div><div class="dots" id="dots">${nw.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`;
+  let h=`<div class="hero" id="hero">${nw.map(c=>{return `<div class="sl" data-id="${c.id}"><div class="im">${cimg(c,'')}<div class="tx"><h2>${esc(c.title)}</h2><p>${esc(c.genre||'Khác')} · ${c.chapters.length} chương</p><button class="go">${c.p?'Đọc tiếp':'Đọc ngay'}</button></div></div></div>`}).join('')}</div><div class="dots" id="dots">${nw.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`;
   const ct=cont();
   h+=row('Đang đọc',ct,'cont',{w:1,prog:1});
   h+=row('Mới thêm',byNew().slice(0,12),'new');
@@ -219,33 +227,61 @@ function closeM(){$('#modal').hidden=true;$('#modal').innerHTML=''}
 $('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
 
 /* import */
-function pick(){modal(`<div class="sheet"><h2>Thêm truyện</h2><p>Chọn thư mục truyện (mỗi thư mục con là một chương) hoặc chọn nhiều ảnh cùng lúc.</p><div class="col"><button class="btn" id="p1">Chọn thư mục</button><button class="btn g" id="p2">Chọn ảnh</button><button class="btn g" id="p3">Đóng</button></div></div>`);
-  $('#p1').onclick=()=>$('#fd').click();$('#p2').onclick=()=>$('#fi').click();$('#p3').onclick=closeM}
+function pick(){addForm()}
 const isImg=f=>f.type.startsWith('image/')||/\.(jpe?g|png|webp|gif|avif|bmp)$/i.test(f.name);
-$('#fd').onchange=e=>{
-  const fs=[...e.target.files].filter(isImg);e.target.value='';const g={};
-  fs.forEach(f=>{const p=(f.webkitRelativePath||f.name).split('/');const root=p.length>1?p[0]:'Truyện mới';const ch=p.length>2?p.slice(1,-1).join(' / '):'Chương 1';((g[root]=g[root]||{})[ch]=g[root][ch]||[]).push(f)});
-  review(Object.entries(g).map(([t,chs])=>({title:t,chapters:Object.keys(chs).sort(nat).map(n=>({name:n,files:chs[n].sort((a,b)=>nat(a.name,b.name))}))})));
-};
-$('#fi').onchange=e=>{const fs=[...e.target.files].filter(isImg).sort((a,b)=>nat(a.name,b.name));e.target.value='';review(fs.length?[{title:'Truyện mới',chapters:[{name:'Chương 1',files:fs}]}]:[])};
 const gdl=()=>'<datalist id="gl">'+[...new Set([...GEN,...comics.map(c=>c.genre).filter(Boolean)])].map(x=>`<option value="${esc(x)}">`).join('')+'</datalist>';
-function review(items){
-  if(!items.length){modal(`<div class="sheet"><h2>Không tìm thấy ảnh</h2><p>Thư mục cần chứa các ảnh JPG, PNG hoặc WebP.</p><div class="row"><button class="btn" onclick="closeM()">Đóng</button></div></div>`);return}
-  modal(`<div class="sheet"><h2>Xác nhận ${items.length} truyện</h2>${gdl()}`+items.map((it,i)=>`<div data-i="${i}"><label>Tên truyện (${it.chapters.length} chương, ${it.chapters.reduce((a,c)=>a+c.files.length,0)} trang)</label><input class="ti" value="${esc(it.title)}"><label>Thể loại</label><input class="gi" list="gl" value="Khác"></div>${i<items.length-1?'<hr>':''}`).join('')+`<div class="row"><button class="btn g" onclick="closeM()">Huỷ</button><button class="btn" id="sv">Lưu vào tủ</button></div></div>`);
+let F=null;
+function setPoster(f){F.poster=f;if(F.pu)URL.revokeObjectURL(F.pu);F.pu=URL.createObjectURL(f);const p=$('#pst');if(p){p.style.backgroundImage=`url(${F.pu})`;p.style.borderStyle='solid';p.textContent=''}}
+function addForm(){
+  F={poster:null,chs:[],pu:null};
+  modal(`<div class="sheet"><h2>Thêm truyện</h2>${gdl()}<div class="fr"><div class="pst" id="pst">Chọn poster</div><div><label>Tên truyện</label><input id="ft"><label>Số chap</label><input id="fn" type="number" min="1" value="1" inputmode="numeric"></div></div><label>Thể loại</label><input id="fg" list="gl" placeholder="Chọn hoặc nhập thể loại"><div class="chips" style="padding:8px 0 0">${GEN.map(g=>`<button class="chip" type="button" data-gg="${esc(g)}">${esc(g)}</button>`).join('')}</div><label>Nội dung (không bắt buộc)</label><div class="row" style="justify-content:flex-start;margin-top:4px"><button class="btn g" id="x1">Chọn thư mục</button><button class="btn g" id="x2">Chọn ảnh</button></div><p id="fs" style="margin:8px 0 0">Chưa chọn nội dung. Bạn có thể thêm ảnh cho từng chap sau.</p><div class="row"><button class="btn g" onclick="closeM()">Huỷ</button><button class="btn" id="sv">Lưu vào tủ</button></div></div>`);
+  $('#pst').onclick=()=>$('#fp').click();
+  $('#x1').onclick=()=>$('#fd').click();$('#x2').onclick=()=>$('#fi').click();
+  document.querySelectorAll('#modal [data-gg]').forEach(b=>b.onclick=()=>{$('#fg').value=b.dataset.gg});
   $('#sv').onclick=async()=>{
-    for(const b of document.querySelectorAll('#modal [data-i]')){
-      const it=items[+b.dataset.i];
-      const c={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:b.querySelector('.ti').value.trim()||it.title,genre:b.querySelector('.gi').value.trim()||'Khác',added:Date.now(),chapters:it.chapters,p:null};
-      comics.push(c);await saveC(c);
-    }
-    closeM();tab='home';list=null;gf=null;render();
+    const title=$('#ft').value.trim();if(!title){$('#ft').focus();return}
+    const n=Math.max(1,Math.min(2000,parseInt($('#fn').value)||1),F.chs.length);
+    const chapters=[];for(let i=0;i<n;i++)chapters.push(F.chs[i]||{name:'Chap '+(i+1),files:[]});
+    const c={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),title,genre:$('#fg').value.trim()||'Khác',added:Date.now(),poster:F.poster||null,chapters,p:null};
+    comics.push(c);await saveC(c);F=null;closeM();tab='home';list=null;gf=null;render();
   };
 }
+$('#fp').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f&&F&&isImg(f))setPoster(f)};
+function fillContent(root){
+  const n=F.chs.length,pg=F.chs.reduce((a,c)=>a+c.files.length,0);
+  $('#fs').textContent=n+' chap, '+pg+' trang đã chọn.';
+  if(+$('#fn').value<n)$('#fn').value=n;
+  if(root&&!$('#ft').value.trim())$('#ft').value=root;
+  if(!F.poster)setPoster(F.chs[0].files[0]);
+}
+$('#fd').onchange=e=>{
+  const fs=[...e.target.files].filter(isImg);e.target.value='';if(!F||!fs.length)return;
+  const g={};let root='';
+  fs.forEach(f=>{const p=(f.webkitRelativePath||f.name).split('/');root=root||(p.length>1?p[0]:'');const ch=p.length>2?p.slice(1,-1).join(' / '):'Chap 1';(g[ch]=g[ch]||[]).push(f)});
+  F.chs=Object.keys(g).sort(nat).map(n=>({name:n,files:g[n].sort((a,b)=>nat(a.name,b.name))}));
+  fillContent(root);
+};
+$('#fi').onchange=e=>{
+  const fs=[...e.target.files].filter(isImg).sort((a,b)=>nat(a.name,b.name));e.target.value='';if(!F||!fs.length)return;
+  F.chs=[{name:'Chap 1',files:fs}];fillContent('');
+};
+$('#fc').onchange=async e=>{
+  const fs=[...e.target.files].filter(isImg).sort((a,b)=>nat(a.name,b.name));e.target.value='';if(!fs.length||!cur)return;
+  cur.c.chapters[cur.ch].files=fs;await saveC(cur.c);read(cur.c.id,cur.ch,0);
+};
 function editForm(id){
-  const c=comics.find(x=>x.id===id);
-  modal(`<div class="sheet"><h2>Sửa truyện</h2>${gdl()}<label>Tên truyện</label><input id="et" value="${esc(c.title)}"><label>Thể loại</label><input id="eg" list="gl" value="${esc(c.genre||'')}"><div class="row"><button class="btn r" id="ed">Xoá</button><button class="btn g" onclick="closeM()">Huỷ</button><button class="btn" id="es">Lưu</button></div></div>`);
-  $('#es').onclick=async()=>{c.title=$('#et').value.trim()||c.title;c.genre=$('#eg').value.trim()||'Khác';await saveC(c);closeM();render()};
-  $('#ed').onclick=async()=>{if(!confirm('Xoá “'+c.title+'” khỏi tủ truyện?'))return;comics=comics.filter(x=>x!==c);await dbDel('c',id);closeM();render()};
+  const c=comics.find(x=>x.id===id);F={poster:null,chs:[],pu:null};
+  const cb=cvr(c),u=cb?URL.createObjectURL(cb):'';F.pu=u||null;
+  modal(`<div class="sheet"><h2>Sửa truyện</h2>${gdl()}<div class="fr"><div class="pst" id="pst" style="${u?`background-image:url(${u});border-style:solid`:''}">${u?'':'Chọn poster'}</div><div><label>Tên truyện</label><input id="et" value="${esc(c.title)}"><label>Số chap (hiện có ${c.chapters.length})</label><input id="en" type="number" min="${c.chapters.length}" value="${c.chapters.length}" inputmode="numeric"></div></div><label>Thể loại</label><input id="eg" list="gl" value="${esc(c.genre||'')}"><div class="row"><button class="btn r" id="ed">Xoá</button><button class="btn g" onclick="closeM()">Huỷ</button><button class="btn" id="es">Lưu</button></div></div>`);
+  $('#pst').onclick=()=>$('#fp').click();
+  $('#es').onclick=async()=>{
+    c.title=$('#et').value.trim()||c.title;c.genre=$('#eg').value.trim()||'Khác';
+    if(F&&F.poster)c.poster=F.poster;
+    const n=Math.min(2000,parseInt($('#en').value)||0);
+    while(c.chapters.length<n)c.chapters.push({name:'Chap '+(c.chapters.length+1),files:[]});
+    await saveC(c);F=null;closeM();render();
+  };
+  $('#ed').onclick=async()=>{if(!confirm('Xoá “'+c.title+'” khỏi tủ truyện?'))return;comics=comics.filter(x=>x!==c);await dbDel('c',id);F=null;closeM();render()};
 }
 
 /* account */
@@ -317,14 +353,15 @@ async function read(id,ch,pg){
   const imgs=urls.map((u,i)=>{const im=new Image();im.src=u;im.alt='Trang '+(i+1);im.dataset.i=i;PG.append(im);return im});
   const nx=document.createElement('div');nx.className='nx';
   nx.innerHTML=ch<c.chapters.length-1?'<button class="btn" id="nn">Chương tiếp</button>':'<p style="color:#999">Bạn đã đọc hết truyện này.</p>';
+  if(!files.length){const em=document.createElement('div');em.className='nx';em.innerHTML='<p style="color:#999">Chap này chưa có ảnh.</p><button class="btn">Chọn ảnh cho chap này</button>';em.querySelector('button').onclick=()=>$('#fc').click();PG.prepend(em)}
   PG.append(nx);if($('#nn'))$('#nn').onclick=()=>read(id,ch+1,0);
-  pg=Math.min(pg||0,imgs.length-1);
+  pg=Math.max(0,Math.min(pg||0,imgs.length-1));
   if(pg>0){await Promise.all(imgs.slice(0,pg+1).map(im=>Promise.race([im.decode().catch(()=>{}),new Promise(r=>setTimeout(r,4000))])));imgs[pg].scrollIntoView()}
   if(obs)obs.disconnect();
   obs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const i=+en.target.dataset.i;$('#ct').textContent=(i+1)+' / '+imgs.length;c.p={ch,pg:i,t:Date.now()};clearTimeout(tmr);tmr=setTimeout(()=>saveC(c),500)}}),{root:PG,rootMargin:'-50% 0px -49% 0px',threshold:0});
   imgs.forEach(im=>obs.observe(im));
-  $('#ct').textContent=(pg+1)+' / '+imgs.length;
-  if(!c.p||c.p.ch!==ch)c.p={ch,pg,t:Date.now()};
+  $('#ct').textContent=imgs.length?(pg+1)+' / '+imgs.length:'';
+  if(files.length&&(!c.p||c.p.ch!==ch))c.p={ch,pg,t:Date.now()};
 }
 function closeR(){
   $('#rd').hidden=true;document.body.style.overflow='';
